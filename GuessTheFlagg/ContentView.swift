@@ -43,7 +43,7 @@ struct ContentView: View {
                     ForEach(0..<3) { number in
                         Button {
                             self.counter += 1
-                            if self.counter >= 8 {
+                            if self.counter >= 7 {
                                 self.controlingGameRound = true
                             }
                             flagTapped(number)
