@@ -6,6 +6,15 @@
 //
 import SwiftUI
 
+struct ImageFlage: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+        .font(.largeTitle)
+    }
+}
+
 struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
