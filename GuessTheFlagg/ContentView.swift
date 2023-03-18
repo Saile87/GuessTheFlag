@@ -6,22 +6,23 @@
 //
 import SwiftUI
 
-struct ImageFlage: View {
-    var text: String
-    
+struct ImageView: View {
+    var foto: some View {
+        Image(systemName: "Countrys")
+    }
     var body: some View {
-        Text(text)
-        .font(.largeTitle)
+        foto
+            .clipShape(Capsule())
+            .shadow(radius: 4)
+            .font(.largeTitle)
     }
 }
 
 struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
-    
     @State private var controlingGameRound = false
     @State private var gameOver = ""
-    
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var score = 0
@@ -57,10 +58,7 @@ struct ContentView: View {
                             }
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(color: .white, radius: 4)
+                            ImageView()
                         }
                     }
                 }
