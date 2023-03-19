@@ -6,18 +6,19 @@
 //
 import SwiftUI
 
-struct ImageView: View {
-    var foto: some View {
-        Image(systemName: "Countrys")
-    }
+struct FlagImage: View {
     var body: some View {
-        foto
+        
+        Image(name)
             .clipShape(Capsule())
             .shadow(radius: 4)
             .font(.largeTitle)
     }
+    let name: String
+    init(name: String) {
+        self.name = name
+    }
 }
-
 struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -58,7 +59,7 @@ struct ContentView: View {
                             }
                             flagTapped(number)
                         } label: {
-                            ImageView()
+                            FlagImage(name: "\([countries])")
                         }
                     }
                 }
