@@ -13,6 +13,7 @@ struct FlagImage: View {
             .clipShape(Capsule())
             .shadow(radius: 4)
             .font(.largeTitle)
+            .padding(4)
     }
     let name: String
     init(name: String) {
@@ -59,7 +60,7 @@ struct ContentView: View {
                             }
                             flagTapped(number)
                         } label: {
-                            FlagImage(name: "\([countries])")
+                            FlagImage(name: countries[number])
                         }
                     }
                 }
