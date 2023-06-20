@@ -29,6 +29,7 @@ struct ContentView: View {
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var score = 0
     @State private var counter = 0
+    @State private var animationAmount = 0.0
     
     var body: some View {
         ZStack {
@@ -43,7 +44,6 @@ struct ContentView: View {
                 Text("Guess The Flag")
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
-                
                 VStack(spacing: 15) {
                     VStack {
                         Text("Tap the Flag of")
@@ -54,6 +54,9 @@ struct ContentView: View {
                     }
                     ForEach(0..<3) { number in
                         Button {
+                                withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+                                    animationAmount += 360
+                                }
                             self.counter += 1
                             if self.counter >= 8 {
                                 self.controlingGameRound = true
@@ -62,12 +65,14 @@ struct ContentView: View {
                         } label: {
                             FlagImage(name: countries[number])
                         }
+                            .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 20)
                 .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                
                 
                 Spacer()
                 Spacer()
@@ -80,6 +85,7 @@ struct ContentView: View {
             }
             .padding()
         }
+            
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
@@ -102,6 +108,7 @@ struct ContentView: View {
         }
         showingScore = true
     }
+    
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
